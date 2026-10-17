@@ -1,0 +1,15 @@
+.git
+.env
+.venv
+**/.venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.ruff_cache
+**/node_modules
+**/dist
+data
+models
+tmp
+.idea
+.vscode

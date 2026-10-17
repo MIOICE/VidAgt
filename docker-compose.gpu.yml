@@ -1,0 +1,9 @@
+services:
+  worker-media:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.gpu
+    gpus: all
+    environment:
+      ASR_DEVICE: cuda
+

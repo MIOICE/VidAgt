@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vidagt-backend"
+version = "0.1.0"
+description = "Evidence-grounded multimodal video understanding agent"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "asyncmy>=0.2.10,<1",
+  "boto3>=1.35,<2",
+  "celery[redis]>=5.5,<6",
+  "cryptography>=44,<47",
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "langchain-openai>=0.3,<2",
+  "langgraph>=0.6,<2",
+  "numpy>=2,<3",
+  "pydantic-settings>=2.7,<3",
+  "python-multipart>=0.0.20,<1",
+  "redis>=5.2,<7",
+  "sse-starlette>=2.2,<4",
+  "sqlalchemy[asyncio]>=2.0.36,<3",
+  "tenacity>=9,<10",
+  "uvicorn[standard]>=0.34,<1",
+  "yt-dlp>=2025.1.15",
+]
+
+[project.optional-dependencies]
+media = [
+  # faster-whisper 1.2 still passes metadata_errors to av.open; PyAV 19 removed it.
+  "av>=11,<19",
+  "faster-whisper>=1.1,<2",
+  "opencv-python-headless>=4.10,<5",
+]
+dev = [
+  "aiosqlite>=0.20,<1",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
+  "pytest-cov>=6,<7",
+  "ruff>=0.9,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "ASYNC"]
+
+[tool.ruff.lint.per-file-ignores]
+"app/api/routes/*.py" = ["B008"]
