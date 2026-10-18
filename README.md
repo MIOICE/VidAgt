@@ -2,6 +2,21 @@
 
 VidAgt 是一个使用 Python、FastAPI 与 LangGraph 实现的长视频理解工作台。它把视频转换为带时间戳的多模态证据，自动生成结构化报告，并允许围绕同一视频继续追问。
 
+## 项目预览
+
+### 全链路工作流
+
+![VidAgt 全链路工作流](docs/images/vidagt-full-pipeline.svg)
+
+图中按用户、Vue3 前端、FastAPI、Celery/Redis、媒体处理 Worker、LangGraph/模型服务与 MySQL/MinIO 划分泳道，同时标出上传恢复、内容去重、失败重试和证据化追问路径。
+
+### Web 工作台
+
+| 视频资料库 | 视频导入 |
+| --- | --- |
+| ![VidAgt 视频资料库](docs/images/vidagt-video-library.jpg) | ![VidAgt 视频导入](docs/images/vidagt-upload-dialog.jpg) |
+| 汇总视频数量、解析状态和内容时长 | 支持本地文件与视频链接两种导入方式 |
+
 ## 已实现能力
 
 - MinIO Multipart Upload：16MiB 分片、并发直传、刷新后查询缺失分片并续传。
